@@ -18,6 +18,6 @@ before(function(done) {
 });
 
 // Empty collections when done testing a particular unit
-afterEach(function(done) {
-    Ingredient.deleteMany({}, done);
+beforeEach(function(done) {
+    mongoose.connection.collections.ingredients.drop(done);
 });

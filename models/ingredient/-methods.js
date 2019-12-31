@@ -12,7 +12,7 @@ const methods =  {
      * Produces a message based on how close
      * the ingredient is to expiring.
      */
-    isAboutToExpire: function() {
+    getExpirationMessage: function() {
         let todaysDate = moment();
         let diff = todaysDate.diff(this.expiration, 'days');
 
