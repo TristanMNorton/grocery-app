@@ -4,9 +4,9 @@
  */
 
 // Dependencies
-const mongoose = require("mongoose");
-const moment = require('moment');
-const methods = require('./-methods');
+const mongoose = require("mongoose")
+const moment = require('moment')
+const methods = require('./-methods')
 
 // Schema
 const ingredientSchema = new mongoose.Schema({
@@ -18,17 +18,17 @@ const ingredientSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  qunatityType: {
+  quantityType: {
     type: String,
     required: true
   },
   expiration: Date,
   photo: String
-});
+})
 
 // Add Methods
-ingredientSchema.methods = methods;
+ingredientSchema.methods = methods
 
-const Ingredient = new mongoose.model('Ingredient', ingredientSchema);
+const Ingredient = new mongoose.model('Ingredient', ingredientSchema)
 
-module.exports = Ingredient;
+module.exports = Ingredient
