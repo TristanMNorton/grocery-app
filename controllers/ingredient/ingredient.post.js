@@ -3,21 +3,19 @@
  * Author: Tristan Norton 2019
  */
 
-const mocha = require('mocha')
+// Dependencies
 const Ingredient = require('../../models/ingredient/ingredient')
 
-const saveIngredient = async (body) => {
-    const newIngredient = new Ingredient(body)
+const saveIngredient = async ingredient => {
+  const newIngredient = new Ingredient(ingredient)
 
-    const result = await newIngredient.save()
+  const result = await newIngredient.save()
 
-    console.log(result);
+  if (!result) {
+    return false
+  }
 
-    if (!result) {
-        return false
-    }
-
-    return result;
+  return result
 }
 
 module.exports = saveIngredient

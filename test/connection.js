@@ -7,9 +7,10 @@ const mongoose = require('mongoose')
 
 // Setup connection before tests
 before(function(done) {
-    mongoose.connect('mongodb://localhost/grocery-app', {
+    mongoose.connect('mongodb://localhost/grocery-app-testing', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     })
     mongoose.connection.once('open', function(){
         done()
