@@ -14,8 +14,8 @@ const ingredientPut = require('../controllers/ingredient/ingredient.put')
  * TODO: Error Handling
  */
 router.post('/', async function (req, res, next) {
-  const saveResponse = await ingredientPost(req.body)
-  res.send(saveResponse)
+    const saveResponse = await ingredientPost(req.body)
+    res.send(saveResponse)
 })
 
 /**
@@ -23,8 +23,8 @@ router.post('/', async function (req, res, next) {
  * TODO: Error Handling
  */
 router.put('/:id', async function (req, res, next) {
-  const updateResponse = await ingredientPut(req.params.id, req.body)
-  res.send(updateResponse)
+    const updateResponse = await ingredientPut(req.params.id, req.body)
+    res.send(updateResponse)
 })
 
 

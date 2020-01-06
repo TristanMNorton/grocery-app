@@ -9,20 +9,20 @@ const methods = require('./-methods')
 
 // Schema
 const ingredientSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  quantity: {
-    type: Number,
-    default: 0
-  },
-  quantityType: {
-    type: String,
-    required: true
-  },
-  expiration: Date,
-  photo: String
+    name: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: Number,
+        default: 0
+    },
+    quantityType: {
+        type: String,
+        required: true
+    },
+    expiration: Date,
+    photo: String
 })
 
 // Add Methods

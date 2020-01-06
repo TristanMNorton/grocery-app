@@ -7,15 +7,15 @@
 const Ingredient = require('../../models/ingredient/ingredient')
 
 const saveIngredient = async ingredient => {
-  const newIngredient = new Ingredient(ingredient)
+    const newIngredient = new Ingredient(ingredient)
 
-  const result = await newIngredient.save()
+    const result = await newIngredient.save()
 
-  if (!result) {
-    return false
-  }
+    if (!result) {
+        return false
+    }
 
-  return result
+    return result
 }
 
 module.exports = saveIngredient
