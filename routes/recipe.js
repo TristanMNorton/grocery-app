@@ -1,5 +1,7 @@
 /**
  * Recipe GET, POST and PUT routing
+ * TODO: this code is nearly identical to ingredient put and post routing,
+ * how to abstract agnostically.
  * Author: Tristan Norton 2019
  */
 
@@ -19,7 +21,7 @@ router.post('/', async function (req, res, next) {
 })
 
 /**
- * Ingredient PUT
+ * Recipe PUT
  * TODO: Error Handling
  */
 router.put('/:id', async function (req, res, next) {
