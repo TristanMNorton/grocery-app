@@ -11,10 +11,6 @@ const saveIngredient = async ingredient => {
 
     const result = await newIngredient.save()
 
-    if (!result) {
-        return false
-    }
-
     return result
 }
 
