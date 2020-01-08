@@ -25,6 +25,7 @@ mongoose.connect('mongodb://localhost/grocery-app', {
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var ingredientRouter = require('./routes/ingredient')
+var recipeRouter = require('./routes/recipe')
 
 // Create App
 var app = express()
@@ -45,6 +46,8 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/ingredient', ingredientRouter)
 app.use('/ingredient/:id', ingredientRouter)
+app.use('/recipe', recipeRouter)
+app.use('/recipe/:id', recipeRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
