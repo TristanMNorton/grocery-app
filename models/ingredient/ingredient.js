@@ -16,8 +16,6 @@ const ingredientSchema = new mongoose.Schema({
             validator: async value => {
                 const result = await Ingredient.findOne({ name: value })
 
-                console.log(result !== null)
-
                 return result === null
             },
             message: props => `The ingredient ${props.value} already exists!`,
