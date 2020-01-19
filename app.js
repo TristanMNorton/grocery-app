@@ -29,10 +29,6 @@ mongoose.connect(process.env.DB_HOST, {
     useFindAndModify: false
 })
 
-mongoose.connection.on('error', err => {
-    console.log(err)
-})
-
 /**
  * Routes
  */

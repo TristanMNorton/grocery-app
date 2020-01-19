@@ -12,6 +12,16 @@ const ingredientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        validate: {
+            validator: async value => {
+                const result = await Ingredient.findOne({ name: value })
+
+                console.log(result !== null)
+
+                return result === null
+            },
+            message: props => `The ingredient ${props.value} already exists!`,
+        },
     },
     quantity: {
         type: Number,

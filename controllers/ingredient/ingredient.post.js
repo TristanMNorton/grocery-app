@@ -13,6 +13,7 @@ const saveIngredient = async ingredient => {
     try {
         await Ingredient.validate(newIngredient)
     } catch (err) {
+        err.status = 400
         throw err
     }
 
