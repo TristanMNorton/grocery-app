@@ -18,7 +18,7 @@ before(function(done) {
 })
 
 // Empty collections before each test
-after(async function() {
-    await mongoose.connection.collections.ingredients.drop()
-    await mongoose.connection.collections.recipes.drop()
+beforeEach(async function() {
+    await mongoose.connection.collections.ingredients.deleteMany({})
+    await mongoose.connection.collections.recipes.deleteMany({})
 })

@@ -11,7 +11,15 @@ const Schema =  mongoose.Schema
 const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        validate: {
+            validator: async value => {
+                const result = await Recipe.findOne({ name: value })
+
+                return result === null
+            },
+            message: props => `The recipe ${props.value} already exists!`,
+        },
     },
     rating: {
         type: Number,
