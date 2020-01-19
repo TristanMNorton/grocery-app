@@ -3,58 +3,80 @@
  * Author: Tristan Norton 2019
  */
 
- // Dependencies
-var createError = require('http-errors')
-var express = require('express')
-var path = require('path')
-var cookieParser = require('cookie-parser')
-var logger = require('morgan')
-var mongoose = require('mongoose')
+/**
+ * Dependencies
+ */
+const dotenv = require('dotenv')
+const createError = require('http-errors')
+const express = require('express')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const mongoose = require('mongoose')
+
+/**
+ * Env init
+ */
+dotenv.config()
 
 /**
  * DB Connection
  * TODO: Reference env variable for DB URL
  */
-mongoose.connect('mongodb://localhost/grocery-app', {
+mongoose.connect(process.env.DB_HOST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 })
 
-// Routes
-var indexRouter = require('./routes/index')
-var usersRouter = require('./routes/users')
-var ingredientRouter = require('./routes/ingredient')
-var recipeRouter = require('./routes/recipe')
+/**
+ * Routes
+ */
+const indexRouter = require('./routes/index')
+const usersRouter = require('./routes/users')
+const ingredientRouter = require('./routes/ingredient')
+const recipeRouter = require('./routes/recipe')
 
-// Create App
-var app = express()
+/**
+ * Create App
+ */
+const app = express()
 
-// view engine setup
+/**
+ * View Engine Setup
+ */
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'twig')
 
-// Middleware
+/**
+ * Middleware
+ */
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Apply Routers
+/**
+ * Apply Routers
+ */
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
-app.use('/ingredient', ingredientRouter)
-app.use('/ingredient/:id', ingredientRouter)
-app.use('/recipe', recipeRouter)
-app.use('/recipe/:id', recipeRouter)
+app.use('/api/v1/ingredient', ingredientRouter)
+app.use('/api/v1/ingredient/:id', ingredientRouter)
+app.use('/api/v1/recipe', recipeRouter)
+app.use('/api/v1/recipe/:id', recipeRouter)
 
-// catch 404 and forward to error handler
+/**
+ * 404 Processing
+ */
 app.use(function(req, res, next) {
     next(createError(404))
 })
 
-// error handler
+/**
+ * Error Handler
+ */
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message
