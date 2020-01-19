@@ -14,8 +14,11 @@ const ingredientPut = require('../controllers/ingredient/ingredient.put')
  * TODO: Error Handling
  */
 router.post('/', async function (req, res, next) {
-    const saveResponse = await ingredientPost(req.body)
-    res.send(saveResponse)
+    await ingredientPost(req.body)
+    .then(response => {
+        res.send(response)
+    })
+    .catch(next)
 })
 
 /**

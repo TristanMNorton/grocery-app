@@ -29,6 +29,10 @@ mongoose.connect(process.env.DB_HOST, {
     useFindAndModify: false
 })
 
+mongoose.connection.on('error', err => {
+    console.log(err)
+})
+
 /**
  * Routes
  */
@@ -82,9 +86,9 @@ app.use(function(err, req, res, next) {
     res.locals.message = err.message
     res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-    // render the error page
+    // Return error response as JSON
     res.status(err.status || 500)
-    res.render('error')
+    res.send(err)
 })
 
 module.exports = app

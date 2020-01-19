@@ -4,10 +4,17 @@
  */
 
 // Dependencies
+const assert = require('assert')
 const Ingredient = require('../../models/ingredient/ingredient')
 
 const saveIngredient = async ingredient => {
-    const newIngredient = new Ingredient(ingredient)
+    const newIngredient = new Ingredient(ingredient) 
+
+    try {
+        await Ingredient.validate(newIngredient)
+    } catch (err) {
+        throw err
+    }
 
     const result = await newIngredient.save()
 
