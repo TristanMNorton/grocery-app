@@ -15,13 +15,11 @@ const recipePut = require('../controllers/recipe/recipe.put')
  * Recipe POST
  * TODO: Error Handling
  */
-router.post('/', function (req, res, next) {
-    recipePost(req.body)
-    .then(response => {
-        res.send(response)
-        next()
-    })
+router.post('/', async function (req, res, next) {
+    const response = await recipePost(req.body)
     .catch(next)
+
+    res.send(response)
 })
 
 /**
