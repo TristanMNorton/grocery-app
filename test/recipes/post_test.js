@@ -19,12 +19,12 @@ describe('Posting recipe', function() {
         const result = await recipePost(bologneseConfig)
 
         await Recipe.findOne({ name: bologneseConfig.name })
-            .then(function(result) {
+            .then(result => {
                 assert(result.name === bologneseConfig.name)
             })
     })
 
-    it ('Disallows saving recipe of same name', async function() {
+    it('Disallows saving recipe of same name', async function() {
         const result = await recipePost(bologneseConfig)
 
         const duplicateName = await recipePost(bologneseConfig).catch(err => {

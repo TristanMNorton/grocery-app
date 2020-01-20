@@ -25,11 +25,20 @@ describe('Ingredient Integrations', function() {
             instructions: 'You cook it...'
         })
 
-        bolognese.ingredientsRequired.push(queriedBanana._id)
+        bolognese.ingredientsRequired.push({
+            ingredient: queriedBanana._id,
+            quantityRequired: 5,
+        })
         await bolognese.save()
         const queriedBolognese = await Recipe.findOne({ name: 'Bolognese' })
 
-        assert(queriedBolognese.ingredientsRequired.indexOf(queriedBanana._id) !== -1)
+        const idsThatMatch = queriedBolognese.ingredientsRequired;
+
+        idsThatMatch.filter(ingredient => 
+            ingredient.ingredient.toString() === queriedBanana._id.toString()
+        )
+
+        assert(idsThatMatch.length > 0)
     })
     
 })
