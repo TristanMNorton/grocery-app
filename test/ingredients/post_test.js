@@ -23,13 +23,5 @@ describe('Posting ingredient', function() {
                 assert(result.name === bananaConfig.name)
             })
     })
-
-    it ('Disallows saving ingredient of same name', async function() {
-        const result = await ingredientPost(bananaConfig)
-
-        const duplicateName = await ingredientPost(bananaConfig).catch(err => {
-            assert(err.errors.name.message === 'The ingredient Banana already exists!')
-        })
-    })
     
 })
