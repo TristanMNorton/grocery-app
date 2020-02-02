@@ -14,7 +14,10 @@ describe('Posting recipe', function() {
         name: 'Bolognese',
         instructions: 'You cook it...'
     }
-    
+
+    /**
+     * Recipe post test
+     */
     it('Posts a recipe to the database', async function() {
         const result = await recipePost(bologneseConfig)
 
@@ -22,14 +25,6 @@ describe('Posting recipe', function() {
             .then(result => {
                 assert(result.name === bologneseConfig.name)
             })
-    })
-
-    it('Disallows saving recipe of same name', async function() {
-        const result = await recipePost(bologneseConfig)
-
-        const duplicateName = await recipePost(bologneseConfig).catch(err => {
-            assert(err.errors.name.message === 'The recipe Bolognese already exists!')
-        })
     })
     
 })

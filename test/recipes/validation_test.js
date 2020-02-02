@@ -12,6 +12,9 @@ const ingredientPost = require('../../controllers/ingredient/ingredient.post')
 
 describe('Posting recipe', function() {
 
+    /**
+     * Same name test
+     */
     it('Disallows saving recipe of same name', async function() {
         const bologneseConfig = {
             name: 'Bolognese',
@@ -25,6 +28,9 @@ describe('Posting recipe', function() {
         })
     })
 
+    /**
+     * Lack of name test
+     */
     it('Disallows saving recipe without name', async function() {
         const bologneseConfig = {
             instructions: 'You cook it...'
@@ -35,6 +41,9 @@ describe('Posting recipe', function() {
         })
     })
 
+    /**
+     * Has instructions test
+     */
     it('Disallows saving recipe without instructions', async function() {
         const bologneseConfig = {
             name: 'Bolognese'
@@ -45,6 +54,9 @@ describe('Posting recipe', function() {
         })
     })
 
+    /**
+     * Ingredient has quantity test
+     */
     it('Disallows saving recipe without a quantity associated with a required ingredient', async function() {
         const bananaConfig = {
             name: 'Banana',

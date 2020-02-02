@@ -9,7 +9,10 @@ const Ingredient = require('../../models/ingredient/ingredient')
 const ingredientPut = require('../../controllers/ingredient/ingredient.put')
 
 describe('Putting ingredient', function() {
-    
+
+    /**
+     * Ingredient put test
+     */   
     it('Posts an ingredient to the database', async function() {
         const banana = new Ingredient({
             name: 'Banana',

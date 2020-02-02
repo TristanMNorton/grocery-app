@@ -10,6 +10,9 @@ const ingredientPost = require('../../controllers/ingredient/ingredient.post')
 
 describe('Ingredient Validation Tests', function() {
 
+    /**
+     * Same name test
+     */
     it('Disallows saving ingredient of same name', async function() {
         const bananaConfig = {
             name: 'Banana',
@@ -22,7 +25,10 @@ describe('Ingredient Validation Tests', function() {
             assert(err.errors.name.message === 'The ingredient Banana already exists!')
         })
     })
-    
+
+    /**
+     * Has name test
+     */
     it('Disallows saving ingredient without a name', async function() {
         const bananaConfig = {
             quantityType: 'weight'
@@ -32,7 +38,10 @@ describe('Ingredient Validation Tests', function() {
             assert(err.errors.name.message === 'Path `name` is required.')
         })
     })
-    
+
+    /**
+     * Ingredient has quantity type
+     */  
     it('Disallows saving ingredient without a quantity type', async function() {
         const bananaConfig = {
             name: 'Banana'

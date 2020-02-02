@@ -1,5 +1,5 @@
 /**
- * Posting Test
+ * Getting Test
  * Author: Tristan Norton 2019
  */
 
@@ -7,23 +7,24 @@ const mocha = require('mocha')
 const assert = require('assert')
 const Ingredient = require('../../models/ingredient/ingredient')
 const ingredientPost = require('../../controllers/ingredient/ingredient.post')
+const ingredientGet = require('../../controllers/ingredient/ingredient.get')
 
-describe('Posting ingredient', function() {
+describe('Getting ingredient', function() {
 
     const bananaConfig = {
         name: 'Banana',
         quantityType: 'weight'
     }
-
+ 
     /**
-     * Ingredient post test
-     */
-    it('Posts an ingredient to the database', async function() {
+     * Get ingredient by id
+     */   
+    it('Gets an ingredient from the database by id', async function() {
         const result = await ingredientPost(bananaConfig)
 
-        await Ingredient.findOne({ name: bananaConfig.name })
-            .then(function(result) {
-                assert(result.name === bananaConfig.name)
+        await ingredientGet(result._id)
+            .then(function(getResult) {
+                assert(getResult.name === bananaConfig.name)
             })
     })
     

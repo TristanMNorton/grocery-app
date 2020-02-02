@@ -8,7 +8,10 @@ const assert = require('assert')
 const Recipe = require('../../models/recipe/recipe')
 
 describe('Saving recipe', function() {
-    
+
+    /**
+     * Recipe save test
+     */
     it('Saves a recipe to the database', function(done) {
         const bolognese = new Recipe({
             name: 'Bolognese',

@@ -4,7 +4,6 @@
  */
 
 // Dependencies
-const assert = require('assert')
 const Ingredient = require('../../models/ingredient/ingredient')
 
 const saveIngredient = async ingredient => {

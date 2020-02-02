@@ -9,6 +9,7 @@
 const express = require('express')
 const router = express.Router()
 const recipePost = require('../controllers/recipe/recipe.post')
+const recipeGet = require('../controllers/recipe/recipe.get')
 const recipePut = require('../controllers/recipe/recipe.put')
 
 /**
@@ -28,6 +29,14 @@ router.post('/', async function (req, res, next) {
  */
 router.put('/:id', async function (req, res, next) {
     const updateResponse = await recipePut(req.params.id, req.body)
+    res.send(updateResponse)
+})
+
+/**
+ * Recipe GET
+ */
+router.get('/:id', async function (req, res) {
+    const updateResponse = await recipeGet(req.params.id)
     res.send(updateResponse)
 })
 
