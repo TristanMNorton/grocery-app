@@ -10,20 +10,10 @@ const Ingredient = require('../../models/ingredient/ingredient')
 const getRecipe = async id => {
 
     const queriedRecipe = await Recipe.findById(id)
-    let returnRecipe = {};
 
-    const ingredientPromises = queriedRecipe.ingredientsRequired.map(ingredientRequired => {
-        return Ingredient.findById(ingredientRequired.ingredient)
-    })
+    queriedRecipe.availibleIngredients = await queriedRecipe.getIngredientsAvailible()
 
-    await Promise.all(ingredientPromises).then(ingredients => {
-        returnRecipe = {
-            ...queriedRecipe,
-            availibleIngredients: ingredients,
-        }
-    })
-
-    console.log(returnRecipe)
+    return queriedRecipe
 
 }
 
