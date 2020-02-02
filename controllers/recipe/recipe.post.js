@@ -7,6 +7,7 @@
 const Recipe = require('../../models/recipe/recipe')
 
 const saveRecipe = async recipe => {
+
     const newRecipe = new Recipe(recipe)
 
     try {
@@ -19,6 +20,7 @@ const saveRecipe = async recipe => {
     const result = await newRecipe.save()
 
     return result
+    
 }
 
 module.exports = saveRecipe

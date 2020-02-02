@@ -11,7 +11,8 @@ const getRecipe = async id => {
 
     const queriedRecipe = await Recipe.findById(id)
 
-    queriedRecipe.availibleIngredients = await queriedRecipe.getIngredientsAvailible()
+    await queriedRecipe.getIngredientsAvailible()
+    queriedRecipe.getPercentageOfIngredientsAvailible()
 
     return queriedRecipe
 

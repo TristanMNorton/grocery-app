@@ -33,7 +33,8 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    availibleIngredients: [{}],
+    ingredientPercentage: Number,
+    availibleIngredients: [],
     ingredientsRequired: [{
         ingredient: {
             type: Schema.Types.ObjectId,
