@@ -23,8 +23,15 @@ const methods =  {
         }, (err, docs) => {
             if (err) { throw err }
             this.availibleIngredients = docs.map(doc => {
-                
-                const [associatedIngredient] = this.ingredientsRequired.filter(ingredient => doc._id.toString() === ingredient.ingredient.toString())
+
+                /**
+                 * Calculates individual percentage availibility on the fly
+                 */
+                const [associatedIngredient] 
+                    = this.ingredientsRequired
+                        .filter(ingredient => 
+                            doc._id.toString() === 
+                            ingredient.ingredient.toString())
                 
                 return {
                     ...doc.toObject(),
@@ -46,12 +53,12 @@ const methods =  {
 
         const quantityInPosession 
             = this.availibleIngredients
-                  .reduce((total, currentValue) => 
+                .reduce((total, currentValue) => 
                     total.quantity + currentValue.quantity)
 
         const quantityRequired
             = this.ingredientsRequired
-                  .reduce((total, currentValue) => 
+                .reduce((total, currentValue) => 
                     total.quantityRequired + currentValue.quantityRequired)
 
         this.ingredientPercentage = quantityInPosession / quantityRequired
