@@ -21,7 +21,9 @@ const methods =  {
                 $in: ingredientsRequired.map(ingredient => mongoose.Types.ObjectId(ingredient.ingredient._id))
             }
         }, (err, docs) => {
+
             if (err) { throw err }
+            
             this.availibleIngredients = docs.map(doc => {
 
                 /**
@@ -37,7 +39,9 @@ const methods =  {
                     ...doc.toObject(),
                     percentage: doc.quantity / associatedIngredient.quantityRequired,
                 } 
+
             })
+
         })
 
     },
@@ -62,6 +66,7 @@ const methods =  {
                     total.quantityRequired + currentValue.quantityRequired)
 
         this.ingredientPercentage = quantityInPosession / quantityRequired
+
     }
 
 }
