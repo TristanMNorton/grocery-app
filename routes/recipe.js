@@ -40,5 +40,10 @@ router.get('/:id', async function (req, res) {
     res.send(updateResponse)
 })
 
+router.get('/', async function (req, res) {
+    const updateResponse = await recipeGet()
+    res.send(updateResponse)
+})
+
 
 module.exports = router

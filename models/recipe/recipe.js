@@ -46,6 +46,7 @@ const recipeSchema = new mongoose.Schema({
         },
     }]
 })
+
 // Add Methods
 recipeSchema.methods = methods
 
