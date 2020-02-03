@@ -55,6 +55,10 @@ const methods =  {
             await this.getIngredientsAvailible()
         }
 
+        /**
+         * Aggregates required and availible quantities for
+         * use in generating a total percentage of pantry availibility
+         */
         const quantityInPosession 
             = this.availibleIngredients
                 .reduce((total, currentValue) => 

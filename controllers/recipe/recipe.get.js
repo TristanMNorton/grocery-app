@@ -28,7 +28,7 @@ const getRecipe = async id => {
 
     const finalRecipes = await queriedRecipes.map(async recipe => {
         await recipe.getIngredientsAvailible()
-        await recipe.getPercentageOfIngredientsAvailible()
+        recipe.getPercentageOfIngredientsAvailible()
         
         return recipe
     })
