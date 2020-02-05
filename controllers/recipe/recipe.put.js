@@ -7,9 +7,9 @@
 const Recipe = require('../../models/recipe/recipe')
 
 const updateRecipe = async (id, updateObject) => {
-    const result = await Recipe.findByIdAndUpdate(id, updateObject, { new: true })
+  const result = await Recipe.findByIdAndUpdate(id, updateObject, { new: true })
 
-    return result
+  return result
 }
 
 module.exports = updateRecipe

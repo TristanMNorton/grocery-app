@@ -4,80 +4,78 @@
  */
 
 const mocha = require('mocha')
+const describe = mocha.describe
+const it = mocha.it
 const assert = require('assert')
-const Recipe = require('../../models/recipe/recipe')
 const recipePost = require('../../controllers/recipe/recipe.post')
-const Ingredient = require('../../models/ingredient/ingredient')
 const ingredientPost = require('../../controllers/ingredient/ingredient.post')
 
-describe('Posting recipe', function() {
+describe('Posting recipe', function () {
+  /**
+   * Same name test
+   */
+  it('Disallows saving recipe of same name', async function () {
+    const bologneseConfig = {
+      name: 'Bolognese',
+      instructions: 'You cook it...'
+    }
 
-    /**
-     * Same name test
-     */
-    it('Disallows saving recipe of same name', async function() {
-        const bologneseConfig = {
-            name: 'Bolognese',
-            instructions: 'You cook it...'
-        }
+    await recipePost(bologneseConfig)
 
-        const result = await recipePost(bologneseConfig)
-
-        const duplicateName = await recipePost(bologneseConfig).catch(err => {
-            assert(err.errors.name.message === 'The recipe Bolognese already exists!')
-        })
+    await recipePost(bologneseConfig).catch(err => {
+      assert(err.errors.name.message === 'The recipe Bolognese already exists!')
     })
+  })
 
-    /**
-     * Lack of name test
-     */
-    it('Disallows saving recipe without name', async function() {
-        const bologneseConfig = {
-            instructions: 'You cook it...'
-        }
+  /**
+   * Lack of name test
+   */
+  it('Disallows saving recipe without name', async function () {
+    const bologneseConfig = {
+      instructions: 'You cook it...'
+    }
 
-         await recipePost(bologneseConfig).catch(err => {
-            assert(err.errors.name.message === 'Path `name` is required.')
-        })
+    await recipePost(bologneseConfig).catch(err => {
+      assert(err.errors.name.message === 'Path `name` is required.')
     })
+  })
 
-    /**
-     * Has instructions test
-     */
-    it('Disallows saving recipe without instructions', async function() {
-        const bologneseConfig = {
-            name: 'Bolognese'
-        }
+  /**
+   * Has instructions test
+   */
+  it('Disallows saving recipe without instructions', async function () {
+    const bologneseConfig = {
+      name: 'Bolognese'
+    }
 
-         await recipePost(bologneseConfig).catch(err => {
-            assert(err.errors.instructions.message === 'Path `instructions` is required.')
-        })
+    await recipePost(bologneseConfig).catch(err => {
+      assert(err.errors.instructions.message === 'Path `instructions` is required.')
     })
+  })
 
-    /**
-     * Ingredient has quantity test
-     */
-    it('Disallows saving recipe without a quantity associated with a required ingredient', async function() {
-        const bananaConfig = {
-            name: 'Banana',
-            quantityType: 'weight'
+  /**
+   * Ingredient has quantity test
+   */
+  it('Disallows saving recipe without a quantity associated with a required ingredient', async function () {
+    const bananaConfig = {
+      name: 'Banana',
+      quantityType: 'weight'
+    }
+
+    const bananaEntry = await ingredientPost(bananaConfig)
+
+    const bologneseConfig = {
+      name: 'Bolognese',
+      instructions: 'You cook it...',
+      ingredientsRequired: [
+        {
+          ingredient: bananaEntry._id
         }
+      ]
+    }
 
-        const bananaEntry = await ingredientPost(bananaConfig)
-
-        const bologneseConfig = {
-            name: 'Bolognese',
-            instructions: 'You cook it...',
-            ingredientsRequired: [
-                {
-                    ingredient: bananaEntry._id,
-                }
-            ]
-        }
-
-        await recipePost(bologneseConfig).catch(err => {
-            assert(err.errors['ingredientsRequired.quantityRequired'] === 'quantityRequired')
-        })
+    await recipePost(bologneseConfig).catch(err => {
+      assert(err.errors['ingredientsRequired.quantityRequired'] === 'quantityRequired')
     })
-    
+  })
 })

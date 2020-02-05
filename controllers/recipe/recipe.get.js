@@ -5,39 +5,36 @@
 
 // Dependencies
 const Recipe = require('../../models/recipe/recipe')
-const Ingredient = require('../../models/ingredient/ingredient')
 
 const getRecipe = async id => {
+  /**
+   * If querying a specific record
+   */
+  if (id) {
+    const queriedRecipe = await Recipe.findById(id)
 
-    /**
-     * If querying a specific record
-     */
-    if (id) {
-        const queriedRecipe = await Recipe.findById(id)
-    
-        await queriedRecipe.getIngredientsAvailible()
-        queriedRecipe.getPercentageOfIngredientsAvailible()
-    
-        return queriedRecipe
-    }
+    await queriedRecipe.getIngredientsAvailible()
+    queriedRecipe.getPercentageOfIngredientsAvailible()
 
-    /**
-     * Query all records
-     */
-    const queriedRecipes = await Recipe.find({})
+    return queriedRecipe
+  }
 
-    const finalRecipes = await queriedRecipes.map(async recipe => {
-        await recipe.getIngredientsAvailible()
-        recipe.getPercentageOfIngredientsAvailible()
-        
-        return recipe
+  /**
+   * Query all records
+   */
+  const queriedRecipes = await Recipe.find({})
+
+  const finalRecipes = await queriedRecipes.map(async recipe => {
+    await recipe.getIngredientsAvailible()
+    recipe.getPercentageOfIngredientsAvailible()
+
+    return recipe
+  })
+
+  return Promise.all(finalRecipes)
+    .then(results => {
+      return results
     })
-
-    return Promise.all(finalRecipes)
-        .then(results => {
-            return results
-        })
-
 }
 
 module.exports = getRecipe

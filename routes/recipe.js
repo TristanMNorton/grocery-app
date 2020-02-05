@@ -17,10 +17,10 @@ const recipePut = require('../controllers/recipe/recipe.put')
  * TODO: Error Handling
  */
 router.post('/', async function (req, res, next) {
-    const response = await recipePost(req.body)
+  const response = await recipePost(req.body)
     .catch(next)
 
-    res.send(response)
+  res.send(response)
 })
 
 /**
@@ -28,22 +28,21 @@ router.post('/', async function (req, res, next) {
  * TODO: Error Handling
  */
 router.put('/:id', async function (req, res, next) {
-    const updateResponse = await recipePut(req.params.id, req.body)
-    res.send(updateResponse)
+  const updateResponse = await recipePut(req.params.id, req.body)
+  res.send(updateResponse)
 })
 
 /**
  * Recipe GET
  */
 router.get('/:id', async function (req, res) {
-    const updateResponse = await recipeGet(req.params.id)
-    res.send(updateResponse)
+  const updateResponse = await recipeGet(req.params.id)
+  res.send(updateResponse)
 })
 
 router.get('/', async function (req, res) {
-    const updateResponse = await recipeGet()
-    res.send(updateResponse)
+  const updateResponse = await recipeGet()
+  res.send(updateResponse)
 })
-
 
 module.exports = router

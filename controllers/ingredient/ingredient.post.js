@@ -7,18 +7,18 @@
 const Ingredient = require('../../models/ingredient/ingredient')
 
 const saveIngredient = async ingredient => {
-    const newIngredient = new Ingredient(ingredient) 
+  const newIngredient = new Ingredient(ingredient)
 
-    try {
-        await Ingredient.validate(newIngredient)
-    } catch (err) {
-        err.status = 400
-        throw err
-    }
+  try {
+    await Ingredient.validate(newIngredient)
+  } catch (err) {
+    err.status = 400
+    throw err
+  }
 
-    const result = await newIngredient.save()
+  const result = await newIngredient.save()
 
-    return result
+  return result
 }
 
 module.exports = saveIngredient

@@ -14,27 +14,26 @@ const ingredientGet = require('../controllers/ingredient/ingredient.get')
  * Ingredient POST
  */
 router.post('/', async function (req, res, next) {
-    const response = await ingredientPost(req.body)
+  const response = await ingredientPost(req.body)
     .catch(next)
 
-    res.send(response)
+  res.send(response)
 })
 
 /**
  * Ingredient PUT
  */
 router.put('/:id', async function (req, res) {
-    const updateResponse = await ingredientPut(req.params.id, req.body)
-    res.send(updateResponse)
+  const updateResponse = await ingredientPut(req.params.id, req.body)
+  res.send(updateResponse)
 })
 
 /**
  * Ingredient GET
  */
 router.get('/:id', async function (req, res) {
-    const updateResponse = await ingredientGet(req.params.id)
-    res.send(updateResponse)
+  const updateResponse = await ingredientGet(req.params.id)
+  res.send(updateResponse)
 })
-
 
 module.exports = router

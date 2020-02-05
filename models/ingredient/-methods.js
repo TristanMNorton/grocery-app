@@ -6,14 +6,14 @@
 // Dependencies
 const moment = require('moment')
 
-const methods =  {
+const methods = {
 
-    /**
+  /**
      * Produces days until expiration
      */
-    getDaysUntilExpiration: function() {
-        return diff = moment().diff(this.expiration, 'days')
-    }
+  getDaysUntilExpiration: function () {
+    return moment().diff(this.expiration, 'days')
+  }
 
 }
 
