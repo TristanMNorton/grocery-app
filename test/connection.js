@@ -3,6 +3,9 @@
  * Author: Tristan Norton 2019
  */
 
+const mocha = require('mocha')
+const before = mocha.before
+const beforeEach = mocha.beforeEach
 const mongoose = require('mongoose')
 
 // Setup connection before tests
