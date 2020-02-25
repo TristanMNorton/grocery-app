@@ -56,6 +56,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(function (req, res, next) {
+  res.header('Content-Type', 'application/vnd.api+json')
+  next()
+})
 
 /**
  * Apply Routers

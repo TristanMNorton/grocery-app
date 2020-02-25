@@ -32,8 +32,14 @@ router.put('/:id', async function (req, res) {
  * Ingredient GET
  */
 router.get('/:id', async function (req, res) {
-  const updateResponse = await ingredientGet(req.params.id)
-  res.send(updateResponse)
+  const ingredient = await ingredientGet(req.params.id, req)
+  res.send({
+    data: ingredient,
+    links: {
+      self: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
+      related: `${req.protocol}://${req.headers.host}${req.baseUrl}`
+    }
+  })
 })
 
 module.exports = router

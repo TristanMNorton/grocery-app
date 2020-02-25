@@ -33,7 +33,9 @@ const getRecipe = async id => {
 
   return Promise.all(finalRecipes)
     .then(results => {
-      return results
+      return {
+        data: results
+      }
     })
 }
 

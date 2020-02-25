@@ -6,7 +6,7 @@
 // Dependencies
 const mongoose = require('mongoose')
 const Model = mongoose.model
-const methods = require('./-methods')
+const methods = require('./_methods')
 const Schema = mongoose.Schema
 
 // Schema

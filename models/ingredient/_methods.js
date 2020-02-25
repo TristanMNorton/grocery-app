@@ -9,8 +9,8 @@ const moment = require('moment')
 const methods = {
 
   /**
-     * Produces days until expiration
-     */
+   * Produces days until expiration
+   */
   getDaysUntilExpiration: function () {
     return moment().diff(this.expiration, 'days')
   }

@@ -7,7 +7,13 @@
 const Ingredient = require('../../models/ingredient/ingredient')
 
 const getIngredient = async id => {
-  return Ingredient.findById(id)
+  const ingredient = await Ingredient.findById(id)
+
+  return {
+    type: 'ingredient',
+    id: ingredient._id,
+    attributes: ingredient
+  }
 }
 
 module.exports = getIngredient
