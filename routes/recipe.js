@@ -36,13 +36,19 @@ router.put('/:id', async function (req, res, next) {
  * Recipe GET
  */
 router.get('/:id', async function (req, res) {
-  const updateResponse = await recipeGet(req.params.id)
-  res.send(updateResponse)
+  const updatedRecipe = await recipeGet(req.params.id, req)
+  res.send(updatedRecipe)
 })
 
 router.get('/', async function (req, res) {
-  const updateResponse = await recipeGet()
-  res.send(updateResponse)
+  const recipe = await recipeGet(null, req)
+  res.send({
+    data: recipe,
+    links: {
+      self: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
+      related: `${req.protocol}://${req.headers.host}${req.baseUrl}`
+    }
+  })
 })
 
 module.exports = router
