@@ -16,11 +16,15 @@ const methods = {
     const ingredientsRequired = this.ingredientsRequired
 
     await Ingredient.find({
+
       _id: {
-        $in: ingredientsRequired.map(ingredient => mongoose.Types.ObjectId(ingredient.ingredient._id))
+        $in: ingredientsRequired
+          .map(ingredient => mongoose.Types.ObjectId(ingredient.ingredient._id))
       }
+
     }, (err, docs) => {
       if (err) { throw err }
+
       this.availibleIngredients = docs.map(doc => {
         /**
          * Calculates individual percentage availibility on the fly
@@ -63,7 +67,6 @@ const methods = {
 
     this.ingredientPercentage = quantityInPosession / quantityRequired
   }
-
 }
 
 module.exports = methods

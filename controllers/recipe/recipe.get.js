@@ -17,7 +17,24 @@ const getRecipe = async (id, req) => {
     await queriedRecipe.getIngredientsAvailible()
     queriedRecipe.getPercentageOfIngredientsAvailible()
 
-    return queriedRecipe
+    return {
+      type: 'recipe',
+      id: queriedRecipe._id,
+      attributes: queriedRecipe,
+      relationships: {
+        ingredient: {
+          links: {
+            related: `${req.protocol}://${req.headers.host}/api/v1/ingredient`
+          },
+          data: queriedRecipe.ingredientsRequired.map(ingredient => {
+            return {
+              type: 'ingredient',
+              id: ingredient.ingredient
+            }
+          })
+        }
+      }
+    }
   }
 
   /**

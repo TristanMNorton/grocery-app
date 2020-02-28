@@ -37,7 +37,13 @@ router.put('/:id', async function (req, res, next) {
  */
 router.get('/:id', async function (req, res) {
   const updatedRecipe = await recipeGet(req.params.id, req)
-  res.send(updatedRecipe)
+  res.send({
+    data: updatedRecipe,
+    links: {
+      self: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
+      related: `${req.protocol}://${req.headers.host}${req.baseUrl}`
+    }
+  })
 })
 
 router.get('/', async function (req, res) {
