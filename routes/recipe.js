@@ -1,6 +1,6 @@
 /**
- * Recipe GET, POST and PUT routing
- * TODO: this code is nearly identical to ingredient put and post routing,
+ * Recipe GET, POST and Patch routing
+ * TODO: this code is nearly identical to ingredient patch and post routing,
  * how to abstract agnostically.
  * Author: Tristan Norton 2019
  */
@@ -10,11 +10,10 @@ const express = require('express')
 const router = express.Router()
 const recipePost = require('../controllers/recipe/recipe.post')
 const recipeGet = require('../controllers/recipe/recipe.get')
-const recipePut = require('../controllers/recipe/recipe.put')
+const recipePatch = require('../controllers/recipe/recipe.patch')
 
 /**
  * Recipe POST
- * TODO: Error Handling
  */
 router.post('/', async function (req, res, next) {
   const response = await recipePost(req.body)
@@ -24,11 +23,10 @@ router.post('/', async function (req, res, next) {
 })
 
 /**
- * Recipe PUT
- * TODO: Error Handling
+ * Recipe PATCH
  */
-router.put('/:id', async function (req, res, next) {
-  const updateResponse = await recipePut(req.params.id, req.body)
+router.patch('/:id', async function (req, res, next) {
+  const updateResponse = await recipePatch(req.params.id, req.body)
   res.send(updateResponse)
 })
 

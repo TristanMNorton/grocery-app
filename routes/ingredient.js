@@ -1,5 +1,5 @@
 /**
- * Ingredient GET, POST and PUT routing
+ * Ingredient GET, POST and PATCH routing
  * Author: Tristan Norton 2019
  */
 
@@ -7,7 +7,7 @@
 const express = require('express')
 const router = express.Router()
 const ingredientPost = require('../controllers/ingredient/ingredient.post')
-const ingredientPut = require('../controllers/ingredient/ingredient.put')
+const ingredientPatch = require('../controllers/ingredient/ingredient.patch')
 const ingredientGet = require('../controllers/ingredient/ingredient.get')
 
 /**
@@ -21,10 +21,10 @@ router.post('/', async function (req, res, next) {
 })
 
 /**
- * Ingredient PUT
+ * Ingredient PATCH
  */
-router.put('/:id', async function (req, res) {
-  const updateResponse = await ingredientPut(req.params.id, req.body)
+router.patch('/:id', async function (req, res) {
+  const updateResponse = await ingredientPatch(req.params.id, req.body)
   res.send(updateResponse)
 })
 
