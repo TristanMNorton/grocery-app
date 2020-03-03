@@ -10,8 +10,6 @@ const assert = require('assert')
 const moment = require('moment')
 const Ingredient = require('../..//models/ingredient/ingredient')
 
-console.log(mocha)
-
 describe('Ingredient Methods', function () {
   /**
      * Tests days til expiration

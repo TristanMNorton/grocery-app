@@ -24,15 +24,21 @@ router.post('/', async function (req, res, next) {
  * Ingredient PATCH
  */
 router.patch('/:id', async function (req, res) {
-  const updateResponse = await ingredientPatch(req.params.id, req.body)
-  res.send(updateResponse)
+  const id = req.params.id
+  const data = req.body.data
+
+  const patchResponse = await ingredientPatch(id, data)
+  res.send(patchResponse)
 })
 
 /**
  * Ingredient GET
  */
 router.get('/:id', async function (req, res) {
-  const ingredient = await ingredientGet(req.params.id, req)
+  const id = req.params.id
+
+  const ingredient = await ingredientGet(id, req)
+
   res.send({
     data: ingredient,
     links: {

@@ -26,7 +26,10 @@ router.post('/', async function (req, res, next) {
  * Recipe PATCH
  */
 router.patch('/:id', async function (req, res, next) {
-  const updateResponse = await recipePatch(req.params.id, req.body)
+  const id = req.params.id
+  const data = req.body.data
+
+  const updateResponse = await recipePatch(id, data)
   res.send(updateResponse)
 })
 
@@ -34,7 +37,10 @@ router.patch('/:id', async function (req, res, next) {
  * Recipe GET
  */
 router.get('/:id', async function (req, res) {
-  const updatedRecipe = await recipeGet(req.params.id, req)
+  const id = req.params.id
+
+  const updatedRecipe = await recipeGet(id, req)
+
   res.send({
     data: updatedRecipe,
     links: {

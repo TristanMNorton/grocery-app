@@ -17,14 +17,14 @@ describe('Getting ingredient', function () {
   }
 
   /**
-     * Get ingredient by id
-     */
+   * Get ingredient by id
+   */
   it('Gets an ingredient from the database by id', async function () {
     const result = await ingredientPost(bananaConfig)
 
     await ingredientGet(result._id)
       .then(function (getResult) {
-        assert(getResult.name === bananaConfig.name)
+        assert(getResult.attributes.name === bananaConfig.name)
       })
   })
 })
