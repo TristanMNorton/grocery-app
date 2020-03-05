@@ -12,7 +12,7 @@ const methods = {
    * Produces days until expiration
    */
   getDaysUntilExpiration: function () {
-    return moment().diff(this.expiration, 'days')
+    this.daysUntilExpiration = moment().diff(this.expiration, 'days')
   }
 
 }

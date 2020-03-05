@@ -9,6 +9,7 @@ const router = express.Router()
 const ingredientPost = require('../controllers/ingredient/ingredient.post')
 const ingredientPatch = require('../controllers/ingredient/ingredient.patch')
 const ingredientGet = require('../controllers/ingredient/ingredient.get')
+const paginationLinks = require('../controllers/services/pageination-links')
 
 /**
  * Ingredient POST
@@ -46,6 +47,29 @@ router.get('/:id', async function (req, res) {
       related: `${req.protocol}://${req.headers.host}${req.baseUrl}`
     }
   })
+})
+
+router.get('/', async function (req, res) {
+  const ingredient = await ingredientGet(null, req)
+  const paginatedData = ingredient.paginatedData
+
+  /**
+   * Set pagination urls if applicable
+   */
+  const links = paginationLinks(req, paginatedData)
+
+  /**
+   * Meta and Data
+   */
+  const meta = {
+    ...paginatedData
+  }
+  const data = ingredient.data
+
+  /**
+   * Merge data with pagination and respond
+   */
+  res.send({ data, links, meta })
 })
 
 module.exports = router

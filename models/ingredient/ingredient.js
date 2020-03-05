@@ -4,6 +4,7 @@
  */
 
 // Dependencies
+const mongoosePaginate = require('mongoose-paginate-v2')
 const mongoose = require('mongoose')
 const Model = mongoose.model
 const methods = require('./_methods')
@@ -30,9 +31,12 @@ const ingredientSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  daysUntilExpiration: Number,
   expiration: Date,
   photo: String
 })
+
+ingredientSchema.plugin(mongoosePaginate)
 
 // Add Methods
 ingredientSchema.methods = methods
