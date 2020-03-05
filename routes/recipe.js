@@ -11,6 +11,7 @@ const router = express.Router()
 const recipePost = require('../controllers/recipe/recipe.post')
 const recipeGet = require('../controllers/recipe/recipe.get')
 const recipePatch = require('../controllers/recipe/recipe.patch')
+const paginationLinks = require('../controllers/services/pageination-links')
 
 /**
  * Recipe POST
@@ -52,13 +53,25 @@ router.get('/:id', async function (req, res) {
 
 router.get('/', async function (req, res) {
   const recipe = await recipeGet(null, req)
-  res.send({
-    data: recipe,
-    links: {
-      self: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
-      related: `${req.protocol}://${req.headers.host}${req.baseUrl}`
-    }
-  })
+  const paginatedData = recipe.paginatedData
+
+  /**
+   * Set pagination urls if applicable
+   */
+  const links = paginationLinks(req, paginatedData)
+
+  /**
+   * Meta and Data
+   */
+  const meta = {
+    ...paginatedData
+  }
+  const data = recipe.data
+
+  /**
+   * Merge data with pagination and respond
+   */
+  res.send({ data, links, meta })
 })
 
 module.exports = router

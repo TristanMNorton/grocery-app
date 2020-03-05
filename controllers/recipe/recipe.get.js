@@ -5,7 +5,7 @@
 
 // Dependencies
 const Recipe = require('../../models/recipe/recipe')
-const ingredientGet = require('../ingredient/ingredient.get')
+const paginationConfig = require('../../config/_pagination.config')
 
 const getRecipe = async (id, req) => {
   /**
@@ -38,11 +38,36 @@ const getRecipe = async (id, req) => {
   }
 
   /**
-   * Query all records
+   * Query and Paginate Records
    */
-  const queriedRecipes = await Recipe.find({})
 
-  const finalRecipes = await queriedRecipes.map(async recipe => {
+  // Grab requested page. Set to one if not requested.
+  const requestedPage = req.query.page ? req.query.page * 1 : 1
+
+  const paginatedRecipeData = await Recipe
+    .paginate({}, {
+      ...paginationConfig,
+      page: requestedPage
+    })
+    .then(result => result)
+
+  const {
+    page,
+    totalPages,
+    nextPage,
+    prevPage,
+    totalDocs
+  } = paginatedRecipeData
+
+  const paginatedData = {
+    page,
+    totalPages,
+    nextPage,
+    prevPage,
+    totalDocs
+  }
+
+  const finalRecipes = await paginatedRecipeData.docs.map(async recipe => {
     await recipe.getIngredientsAvailible()
     recipe.getPercentageOfIngredientsAvailible()
 
@@ -51,26 +76,29 @@ const getRecipe = async (id, req) => {
 
   return Promise.all(finalRecipes)
     .then(results => {
-      return results.map(result => {
-        return {
-          type: 'recipe',
-          id: result._id,
-          attributes: result,
-          relationships: {
-            ingredient: {
-              links: {
-                related: `${req.protocol}://${req.headers.host}/api/v1/ingredient`
-              },
-              data: result.ingredientsRequired.map(ingredient => {
-                return {
-                  type: 'ingredient',
-                  id: ingredient.ingredient
-                }
-              })
+      return {
+        data: results.map(result => {
+          return {
+            type: 'recipe',
+            id: result._id,
+            attributes: result,
+            relationships: {
+              ingredient: {
+                links: {
+                  related: `${req.protocol}://${req.headers.host}/api/v1/ingredient`
+                },
+                data: result.ingredientsRequired.map(ingredient => {
+                  return {
+                    type: 'ingredient',
+                    id: ingredient.ingredient
+                  }
+                })
+              }
             }
           }
-        }
-      })
+        }),
+        paginatedData
+      }
     })
 }
 
