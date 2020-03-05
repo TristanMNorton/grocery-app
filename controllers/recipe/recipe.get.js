@@ -1,6 +1,9 @@
 /**
  * Recipe GET
  * Author: Tristan Norton 2019
+ *
+ * @param String [id] ID of recipe being requested
+ * @param Object [req] Express request object
  */
 
 // Dependencies
@@ -67,6 +70,9 @@ const getRecipe = async (id, req) => {
     totalDocs
   }
 
+  /**
+   * Run model defined methods to set remaining properties
+   */
   const finalRecipes = await paginatedRecipeData.docs.map(async recipe => {
     await recipe.getIngredientsAvailible()
     recipe.getPercentageOfIngredientsAvailible()

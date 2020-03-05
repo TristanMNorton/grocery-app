@@ -1,6 +1,9 @@
 /**
  * Recipe PATCH
  * Author: Tristan Norton 2019
+ *
+ * @param String [id] Record ID of recipe
+ * @param Object [updateObject] Data updates for record
  */
 
 // Dependencies

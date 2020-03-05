@@ -1,6 +1,8 @@
 /**
  * Recipe SAVE
  * Author: Tristan Norton 2019
+ *
+ * @param Object [recipe] Object of data for creating new recipe
  */
 
 // Dependencies

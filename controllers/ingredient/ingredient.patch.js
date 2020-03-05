@@ -1,6 +1,9 @@
 /**
- * Ingredient UPDATE
+ * Ingredient PATCH
  * Author: Tristan Norton 2019
+ *
+ * @param String [id] Record ID of ingredient
+ * @param Object [updateObject] Data updates for record
  */
 
 // Dependencies

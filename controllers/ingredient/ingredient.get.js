@@ -1,6 +1,9 @@
 /**
  * Ingredient GET
  * Author: Tristan Norton 2019
+ *
+ * @param String [id] Record ID of ingredient
+ * @param Object [req] Express request object
  */
 
 // Dependencies
@@ -51,6 +54,9 @@ const getIngredient = async (id, req) => {
     totalDocs
   }
 
+  /**
+   * Run model defined methods to set remaining properties
+   */
   const finalIngredients = paginatedIngredientData.docs.map(ingredient => {
     ingredient.getDaysUntilExpiration()
 
