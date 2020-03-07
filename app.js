@@ -56,7 +56,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'dist')))
 app.use(function (req, res, next) {
   res.header('Content-Type', 'application/vnd.api+json')
   next()
