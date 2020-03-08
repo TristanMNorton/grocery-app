@@ -8,7 +8,7 @@ Requires MongoDB (Not going to rewrite the docs, go [here](https://docs.mongodb.
 npm install
 ```
 
-You'll also need to setup set and environment variable to point to your DB host"
+You'll also need to setup set an environment variable to point to your DB host
 ```
 DB_HOST = <url>
 ```
