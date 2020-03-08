@@ -67,6 +67,7 @@ const methods = {
 
     this.ingredientPercentage = quantityInPosession / quantityRequired
   }
+
 }
 
 module.exports = methods
