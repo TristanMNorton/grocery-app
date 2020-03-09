@@ -18,9 +18,9 @@ For development, first you'll need to start the node server which delivers the c
 ```
 npm start
 ```
-This will run on port 3000
+This will run on port 3000. Technically you can fire up postman and just start fiddle fucking with the api part at this point. Or if you're not part of the herd and feel like using something dope and free you can use insomnia. 
 
-Then, in another console dialog within the same directory, start the vue-cli server for the front end:
+In another console dialog within the same directory, start the vue-cli server for the front end:
 ```
 npm run serve
 ```
