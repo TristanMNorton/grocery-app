@@ -8,7 +8,6 @@
 
 // Dependencies
 const Ingredient = require('../../models/ingredient/ingredient')
-const paginationConfig = require('../../config/_pagination.config')
 
 const getIngredient = async (id, req) => {
   /**
@@ -33,7 +32,6 @@ const getIngredient = async (id, req) => {
 
   const paginatedIngredientData = await Ingredient
     .paginate({}, {
-      ...paginationConfig,
       page: requestedPage
     })
     .then(result => result)

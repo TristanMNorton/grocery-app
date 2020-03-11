@@ -2,31 +2,23 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="3">
-        <p>Test Column</p>
+        <recipe-add-form></recipe-add-form>
       </v-col>
       <v-col cols="12" md="9" v-if="recipeList">
-        <v-card
-          class="mx-auto"
-          v-for="recipe in recipeList"
-          :key="recipe._id"
-        >
-          <v-card-text>
-            <p class="display-1 text--primary">
-              {{ recipe.name }}
-            </p>
-            <div class="text--primary">
-              {{ recipe.description }}
-            </div>
-          </v-card-text>
-          <v-list-item
-            v-for="ingredient in recipe.availibleIngredients"
-            :key="ingredient._id"
+        <v-row>
+          <v-col
+            cols="12"
+            md="6"
+            v-for="recipe in recipeList"
+            :key="recipe._id"
           >
-            <v-list-item-content>
-              <v-list-item-title>{{ ingredient.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+            <RecipePreview
+              class="mx-auto"
+              :recipe="recipe"
+            >
+            </RecipePreview>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -34,6 +26,8 @@
 
 <script>
 import axios from 'axios'
+import RecipePreview from '../components/RecipePreview'
+import RecipeAddForm from '../components/RecipeAddForm'
 
 export default {
 
@@ -42,6 +36,11 @@ export default {
   data: () => ({
     recipeData: []
   }),
+
+  components: {
+    RecipePreview,
+    RecipeAddForm
+  },
 
   computed: {
     recipeList () {

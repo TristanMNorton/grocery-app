@@ -8,7 +8,6 @@
 
 // Dependencies
 const Recipe = require('../../models/recipe/recipe')
-const paginationConfig = require('../../config/_pagination.config')
 
 const getRecipe = async (id, req) => {
   /**
@@ -49,7 +48,7 @@ const getRecipe = async (id, req) => {
 
   const paginatedRecipeData = await Recipe
     .paginate({}, {
-      ...paginationConfig,
+      limit: 3,
       page: requestedPage
     })
     .then(result => result)
@@ -75,7 +74,7 @@ const getRecipe = async (id, req) => {
    */
   const finalRecipes = await paginatedRecipeData.docs.map(async recipe => {
     await recipe.getIngredientsAvailible()
-    recipe.getPercentageOfIngredientsAvailible()
+    await recipe.getPercentageOfIngredientsAvailible()
 
     return recipe
   })
