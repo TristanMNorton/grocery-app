@@ -40,7 +40,7 @@ Then start the api server:
 npm start
 ```
 
-the api server serves it's own front-end, but unlike the development setup, it serves the production build of the front-end at `localhost:3000`.
+The api server serves it's own front-end, but unlike the development setup, it serves the production build of the front-end at `localhost:3000`.
 
 Obvs, this can be forked, and served up with a digital ocean droplet and nginx or whatever you want to do. You do you.
 

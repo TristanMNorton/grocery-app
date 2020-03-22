@@ -1,6 +1,8 @@
 /**
  * Ingredient SAVE
  * Author: Tristan Norton 2019
+ *
+ * @param Object [ingredient] Object of data for creating new ingredient
  */
 
 // Dependencies
