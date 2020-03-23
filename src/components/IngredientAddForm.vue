@@ -50,7 +50,14 @@ export default {
 
   methods: {
     saveIngredient () {
-      axios.post('/api/v1/ingredient', this.formData)
+      axios({
+        method: 'POST',
+        url: '/api/v1/ingredient',
+        data: this.formData,
+        headers: {
+          'content-type': 'application/vnd.api+json'
+        }
+      })
     }
   }
 }

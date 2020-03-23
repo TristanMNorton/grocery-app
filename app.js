@@ -53,7 +53,7 @@ app.set('view engine', 'twig')
  * Middleware
  */
 app.use(logger('dev'))
-app.use(bodyParser.json())
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'dist')))
