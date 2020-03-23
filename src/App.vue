@@ -29,18 +29,20 @@
     </v-app-bar>
 
     <v-content>
-      <RecipeList/>
+      <IngredientList/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import RecipeList from './views/RecipeList'
+// import RecipeList from './views/RecipeList'
+import IngredientList from './views/IngredientList'
 
 export default {
   name: 'App',
   components: {
-    RecipeList
+    // RecipeList,
+    IngredientList
   },
   data: () => ({
     //

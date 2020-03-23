@@ -7,8 +7,17 @@
 
 // Dependencies
 const Ingredient = require('../../models/ingredient/ingredient')
+const measurementTypes = require('../../config/measurement-types')
 
 const saveIngredient = async ingredient => {
+  const abbreviation = ingredient.quantityType
+  const name = measurementTypes[ingredient.quantityType]
+
+  ingredient.quantityType = {
+    abbreviation,
+    name
+  }
+
   const newIngredient = new Ingredient(ingredient)
 
   try {

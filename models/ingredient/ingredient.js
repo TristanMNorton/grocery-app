@@ -28,8 +28,14 @@ const ingredientSchema = new mongoose.Schema({
     default: 0
   },
   quantityType: {
-    type: String,
-    required: true
+    abbreviation: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
   },
   daysUntilExpiration: Number,
   expiration: Date,
