@@ -15,7 +15,6 @@ const paginationLinks = require('../controllers/services/pageination-links')
  * Ingredient POST
  */
 router.post('/', async function (req, res, next) {
-  console.log(req)
   const response = await ingredientPost(req.body)
     .catch(next)
 
