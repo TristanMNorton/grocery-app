@@ -43,6 +43,7 @@ const store = new Vuex.Store({
     setAllIngredients (state, ingredients) {
       state.allIngredients = ingredients
     },
+
     addOneToAllIngredients (state, ingredientData) {
       state.allIngredients.push(ingredientData)
     }
