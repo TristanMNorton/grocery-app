@@ -14,6 +14,7 @@ const getIngredient = async (id, req) => {
    * If ID is provided, return single record
    */
   if (id) {
+    console.log(id)
     const ingredient = await Ingredient.findById(id)
 
     return {

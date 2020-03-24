@@ -9,7 +9,7 @@
           <v-col
             cols="12"
             md="6"
-            v-for="recipe in recipeList"
+            v-for="recipe in allRecipes"
             :key="recipe._id"
           >
             <RecipePreview
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState } from 'vuex'
+import store from '../store'
 import RecipePreview from '../components/RecipePreview'
 import RecipeAddForm from '../components/RecipeAddForm'
 
@@ -43,16 +44,14 @@ export default {
   },
 
   computed: {
+    ...mapState(['allRecipes']),
     recipeList () {
       return this.recipeData.map(recipe => recipe.attributes)
     }
   },
 
   mounted () {
-    axios.get('/api/v1/recipe')
-      .then(res => {
-        this.recipeData = res.data.data
-      })
+    store.dispatch('getAllRecipes')
   }
 
 }

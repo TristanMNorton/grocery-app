@@ -29,21 +29,17 @@
     </v-app-bar>
 
     <v-content>
-      <IngredientList/>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-// import RecipeList from './views/RecipeList'
-import IngredientList from './views/IngredientList'
+import router from './router'
 
 export default {
   name: 'App',
-  components: {
-    // RecipeList,
-    IngredientList
-  },
+  router,
   data: () => ({
     //
   })

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import store from '../store'
 import measurementTypes from '../../config/measurement-types'
 
 export default {
@@ -50,14 +50,7 @@ export default {
 
   methods: {
     saveIngredient () {
-      axios({
-        method: 'POST',
-        url: '/api/v1/ingredient',
-        data: this.formData,
-        headers: {
-          'content-type': 'application/vnd.api+json'
-        }
-      })
+      store.dispatch('saveIngredient', this.formData)
     }
   }
 }

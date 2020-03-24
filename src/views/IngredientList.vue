@@ -4,16 +4,16 @@
       <v-col cols="12" md="3">
         <IngredientAddForm></IngredientAddForm>
       </v-col>
-      <v-col cols="12" md="9" v-if="ingredientList">
+      <v-col cols="12" md="9" v-if="allIngredients">
         <v-row>
           <v-col
             cols="12"
             md="6"
-            v-for="ingredient in ingredientList"
-            :key="ingredient._id"
+            v-for="ingredient in allIngredients"
+            :key="ingredient.id"
           >
             <Ingredient
-                :ingredient="ingredient"
+                :ingredient="ingredient.attributes"
             ></Ingredient>
           </v-col>
         </v-row>
@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapState } from 'vuex'
+import store from '../store'
 import Ingredient from '../components/Ingredient'
 import IngredientAddForm from '../components/IngredientAddForm'
 
@@ -41,22 +42,11 @@ export default {
   },
 
   computed: {
-    ingredientList () {
-      return this.ingredientData.map(ingredient => ingredient.attributes)
-    }
-  },
-
-  methods: {
-    getIngredients () {
-      axios.get('/api/v1/ingredient')
-        .then(res => {
-          this.ingredientData = res.data.data
-        })
-    }
+    ...mapState(['allIngredients'])
   },
 
   mounted () {
-    this.getIngredients()
+    store.dispatch('getAllIngredients')
   }
 
 }
