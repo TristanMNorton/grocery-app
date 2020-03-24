@@ -17,6 +17,17 @@
         required
         v-model="formData.quantityType"
     ></v-select>
+    <v-alert
+      dense
+      outlined
+      color="red"
+      v-if="errorsExist"
+      transition="scroll-y-transition"
+    >
+      <ul>
+        <li v-for="error in errors" :key="error.path" v-text="error.message"></li>
+      </ul>
+    </v-alert>
     <v-btn small color="primary" @click="saveIngredient">Add</v-btn>
   </v-form>
 </template>
@@ -33,7 +44,8 @@ export default {
         quantity: null,
         quantityType: null
       },
-      measurementTypes
+      measurementTypes,
+      errors: []
     }
   },
 
@@ -45,12 +57,22 @@ export default {
           value: key
         }
       })
+    },
+    errorsExist () {
+      return this.errors.length > 0
     }
   },
 
   methods: {
     saveIngredient () {
+      this.errors = []
+
       store.dispatch('saveIngredient', this.formData)
+        .catch(errors => {
+          Object.keys(errors).forEach(error => {
+            this.errors.push(errors[error])
+          })
+        })
     }
   }
 }

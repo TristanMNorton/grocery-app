@@ -19,15 +19,19 @@ const store = new Vuex.Store({
     },
 
     saveIngredient ({ commit }, data) {
-      axios({
-        method: 'POST',
-        url: '/api/v1/ingredient',
-        data,
-        headers: {
-          'content-type': 'application/vnd.api+json'
-        }
-      }).then(res => {
-        this.dispatch('getIngredientUpdateState', res.data._id)
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: '/api/v1/ingredient',
+          data,
+          headers: {
+            'content-type': 'application/vnd.api+json'
+          }
+        }).then(res => {
+          this.dispatch('getIngredientUpdateState', res.data._id)
+        }).catch(error => {
+          reject(error.response.data.errors)
+        })
       })
     },
 
