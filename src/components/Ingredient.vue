@@ -77,9 +77,11 @@ export default {
 
   computed: {
     countWords () {
-      return this.ingredient.quantityType.name === 'count'
-        ? this.ingredient.quantity
-        : `${this.ingredient.quantity}${this.ingredient.quantityType.abbreviation}`
+      const { name } = this.ingredient.quantityType.name
+      const { quantity } = this.ingredient
+      const { abbreviation } = this.ingredient.quantityType
+
+      return name === 'count' ? quantity : `${quantity}${abbreviation}`
     }
   },
 
