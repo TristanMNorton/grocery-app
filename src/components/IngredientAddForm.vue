@@ -22,7 +22,6 @@
       outlined
       color="red"
       v-if="errorsExist"
-      transition="scroll-y-transition"
     >
       <ul>
         <li v-for="error in errors" :key="error.path" v-text="error.message"></li>

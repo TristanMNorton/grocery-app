@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="3">
-        <IngredientAddForm></IngredientAddForm>
+        <ingredient-add-form></ingredient-add-form>
       </v-col>
       <v-col cols="12" md="9" v-if="allIngredients">
         <v-row>
@@ -12,9 +12,9 @@
             v-for="ingredient in allIngredients"
             :key="ingredient.id"
           >
-            <Ingredient
+            <ingredient
                 :ingredient="ingredient.attributes"
-            ></Ingredient>
+            ></ingredient>
           </v-col>
         </v-row>
       </v-col>

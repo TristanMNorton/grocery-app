@@ -26,7 +26,7 @@ router.post('/', async function (req, res, next) {
  */
 router.patch('/:id', async function (req, res) {
   const id = req.params.id
-  const data = req.body.data
+  const data = req.body
 
   const patchResponse = await ingredientPatch(id, data)
   res.send(patchResponse)

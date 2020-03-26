@@ -40,6 +40,31 @@ const store = new Vuex.Store({
         .then(res => {
           commit('addOneToAllIngredients', res.data.data)
         })
+    },
+
+    updateIngredient ({ commit }, updateData) {
+      return new Promise((resolve, reject) => {
+        const data = updateData.data
+
+        axios({
+          method: 'PATCH',
+          url: `/api/v1/ingredient/${updateData.id}`,
+          data,
+          headers: {
+            'content-type': 'application/vnd.api+json'
+          }
+        }).then(res => {
+          this.dispatch('getIngredientAndUpdateExisting', updateData.id)
+          resolve()
+        })
+      })
+    },
+
+    getIngredientAndUpdateExisting ({ commit }, id) {
+      axios.get(`/api/v1/ingredient/${id}`)
+        .then(res => {
+          commit('updateExistingIngredient', res.data.data)
+        })
     }
   },
 
@@ -50,6 +75,14 @@ const store = new Vuex.Store({
 
     addOneToAllIngredients (state, ingredientData) {
       state.allIngredients.push(ingredientData)
+    },
+
+    updateExistingIngredient (state, data) {
+      const [existingIngredient] = state.allIngredients.filter(ingredient => ingredient.id === data.id)
+
+      Object.keys(existingIngredient).forEach(key => {
+        existingIngredient[key] = data[key]
+      })
     }
   }
 
