@@ -5,14 +5,17 @@
     <v-card-text>
       <p class="display-1 text--primary">
         {{ ingredient.name }}
-      </p>
-      <p>
         <v-chip
           class="ma-2"
+          @click="setQuantityUpdateState"
         >
           {{ countWords }}
         </v-chip>
-        available in pantry
+        <v-progress-circular
+          indeterminate
+          v-if="updatingIngredient"
+          class="ml-2"
+        ></v-progress-circular>
       </p>
       <v-card-actions class="py-0 px-0">
         <v-btn
@@ -36,13 +39,15 @@
         >
           Cancel
         </v-btn>
-        <v-text-field
-          label="Update Quantity"
-          required
-          v-model="currentQuantity"
-          v-if="isUpdatingQuantity"
-          class="ml-4"
-        ></v-text-field>
+        <transition name="fade">
+          <v-text-field
+            label="Update Quantity"
+            required
+            v-model="currentQuantity"
+            v-if="isUpdatingQuantity"
+            class="ml-4"
+          ></v-text-field>
+        </transition>
       </v-card-actions>
     </v-card-text>
   </v-card>
@@ -58,7 +63,8 @@ export default {
   data () {
     return {
       isUpdatingQuantity: false,
-      currentQuantity: this.ingredient.quantity
+      currentQuantity: this.ingredient.quantity,
+      updatingIngredient: false
     }
   },
 
@@ -88,16 +94,42 @@ export default {
         quantity: this.currentQuantity
       }
 
+      this.updatingIngredient = true
+
       store.dispatch('updateIngredient', { id, data })
         .then(() => {
           this.isUpdatingQuantity = false
+          this.updatingIngredient = false
         })
     },
 
     cancelQuantityUpdateState () {
       this.isUpdatingQuantity = false
+      this.currentQuantity = this.ingredient.quantity
     }
   }
 
 }
 </script>
+
+<style lang="css">
+  .v-progress-circular {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s, max-height .25s;
+    max-height: 44px;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    max-height: 0;
+    overflow:hidden;
+  }
+  .v-text-field__details {
+    display: none;
+  }
+  .v-input__slot {
+    margin-bottom: 0;
+  }
+</style>
