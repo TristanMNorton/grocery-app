@@ -77,9 +77,8 @@ export default {
 
   computed: {
     countWords () {
-      const { name } = this.ingredient.quantityType.name
+      const { name, abbreviation } = this.ingredient.quantityType
       const { quantity } = this.ingredient
-      const { abbreviation } = this.ingredient.quantityType
 
       return name === 'count' ? quantity : `${quantity}${abbreviation}`
     }
