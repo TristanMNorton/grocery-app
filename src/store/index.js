@@ -29,6 +29,7 @@ const store = new Vuex.Store({
           }
         }).then(res => {
           this.dispatch('getIngredientUpdateState', res.data._id)
+          resolve()
         }).catch(error => {
           reject(error.response.data.errors)
         })
@@ -60,6 +61,20 @@ const store = new Vuex.Store({
       })
     },
 
+    deleteIngredient ({ commit }, ingredientId) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`/api/v1/ingredient/${ingredientId}`, {
+          headers: {
+            'content-type': 'application/vnd.api+json'
+          }
+        })
+          .then(res => {
+            commit('removeIngredientFromState', ingredientId)
+            resolve()
+          })
+      })
+    },
+
     getIngredientAndUpdateExisting ({ commit }, id) {
       axios.get(`/api/v1/ingredient/${id}`)
         .then(res => {
@@ -83,6 +98,12 @@ const store = new Vuex.Store({
       Object.keys(existingIngredient).forEach(key => {
         existingIngredient[key] = data[key]
       })
+    },
+
+    removeIngredientFromState (state, ingredientId) {
+      state.allIngredients = state.allIngredients.filter(
+        ingredient => ingredient.id !== ingredientId
+      )
     }
   }
 

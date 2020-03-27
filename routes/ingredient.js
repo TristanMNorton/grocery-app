@@ -9,6 +9,7 @@ const router = express.Router()
 const ingredientPost = require('../controllers/ingredient/ingredient.post')
 const ingredientPatch = require('../controllers/ingredient/ingredient.patch')
 const ingredientGet = require('../controllers/ingredient/ingredient.get')
+const ingredientDelete = require('../controllers/ingredient/ingredient.delete')
 const paginationLinks = require('../controllers/services/pageination-links')
 
 /**
@@ -16,6 +17,19 @@ const paginationLinks = require('../controllers/services/pageination-links')
  */
 router.post('/', async function (req, res, next) {
   const response = await ingredientPost(req.body)
+    .catch(next)
+
+  res.send(response)
+})
+
+/**
+ * Ingredient DELETE
+ */
+router.delete('/:id', async function (req, res, next) {
+  console.log(req.params.id)
+  const id = req.params.id
+
+  const response = await ingredientDelete(id)
     .catch(next)
 
   res.send(response)

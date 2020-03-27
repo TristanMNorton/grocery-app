@@ -39,6 +39,17 @@
         >
           Cancel
         </v-btn>
+        <transition name="stay">
+          <v-btn
+            text
+            color="red"
+            class="ml-auto v-btn--delete"
+            v-if="!isUpdatingQuantity"
+            @click="deleteIngredient"
+          >
+            Delete
+          </v-btn>
+        </transition>
         <transition name="fade">
           <v-text-field
             label="Update Quantity"
@@ -107,6 +118,10 @@ export default {
     cancelQuantityUpdateState () {
       this.isUpdatingQuantity = false
       this.currentQuantity = this.ingredient.quantity
+    },
+
+    deleteIngredient () {
+      store.dispatch('deleteIngredient', this.ingredient._id)
     }
   }
 
@@ -127,10 +142,24 @@ export default {
     max-height: 0;
     overflow:hidden;
   }
+  .stay-enter-active, .stay-leave-active {
+    transition: opacity .25s;
+  }
+  .stay-enter, .stay-leave-to {
+    opacity: 0;
+  }
   .v-text-field__details {
     display: none;
   }
   .v-input__slot {
     margin-bottom: 0;
+  }
+  .v-card__actions {
+    position: relative;
+  }
+  .v-btn--delete {
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 </style>
