@@ -14,7 +14,7 @@
           >
             <RecipePreview
               class="mx-auto"
-              :recipe="recipe"
+              :recipe="recipe.attributes"
             >
             </RecipePreview>
           </v-col>

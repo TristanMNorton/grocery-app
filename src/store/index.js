@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 
   state: {
-    allIngredients: null
+    allIngredients: null,
+    allRecipes: null
   },
 
   actions: {
@@ -15,6 +16,13 @@ const store = new Vuex.Store({
       axios.get('/api/v1/ingredient')
         .then(res => {
           commit('setAllIngredients', res.data.data)
+        })
+    },
+
+    getAllRecipes ({ commit }) {
+      axios.get('/api/v1/recipe')
+        .then(res => {
+          commit('setAllRecipes', res.data.data)
         })
     },
 
@@ -86,6 +94,10 @@ const store = new Vuex.Store({
   mutations: {
     setAllIngredients (state, ingredients) {
       state.allIngredients = ingredients
+    },
+
+    setAllRecipes (state, recipes) {
+      state.allRecipes = recipes
     },
 
     addOneToAllIngredients (state, ingredientData) {
