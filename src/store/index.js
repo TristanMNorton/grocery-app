@@ -44,10 +44,35 @@ const store = new Vuex.Store({
       })
     },
 
+    saveRecipe ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: '/api/v1/recipe',
+          data,
+          headers: {
+            'content-type': 'application/vnd.api+json'
+          }
+        }).then(res => {
+          this.dispatch('getRecipeUpdateState', res.data._id)
+          resolve()
+        }).catch(error => {
+          reject(error.response.data.errors)
+        })
+      })
+    },
+
     getIngredientUpdateState ({ commit }, ingredientId) {
       axios.get(`/api/v1/ingredient/${ingredientId}`)
         .then(res => {
           commit('addOneToAllIngredients', res.data.data)
+        })
+    },
+
+    getRecipeUpdateState ({ commit }, recipeId) {
+      axios.get(`/api/v1/recipe/${recipeId}`)
+        .then(res => {
+          commit('addOneToAllRecipes', res.data.data)
         })
     },
 
@@ -102,6 +127,10 @@ const store = new Vuex.Store({
 
     addOneToAllIngredients (state, ingredientData) {
       state.allIngredients.push(ingredientData)
+    },
+
+    addOneToAllRecipes (state, recipeData) {
+      state.allRecipes.push(recipeData)
     },
 
     updateExistingIngredient (state, data) {

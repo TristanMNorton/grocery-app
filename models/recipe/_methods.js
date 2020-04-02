@@ -55,17 +55,16 @@ const methods = {
      * Aggregates required and availible quantities for
      * use in generating a total percentage of pantry availibility
      */
-    const quantityInPosession =
-        this.availibleIngredients
-          .reduce((total, currentValue) =>
-            total.quantity + currentValue.quantity)
+    const arrayOfPercentages = this.availibleIngredients.map(ingredient => {
+      const individualPercentage = ingredient.percentage >= 1 ? 1 : ingredient.percentage
 
-    const quantityRequired =
-        this.ingredientsRequired
-          .reduce((total, currentValue) =>
-            total.quantityRequired + currentValue.quantityRequired)
+      return individualPercentage
+    })
 
-    this.ingredientPercentage = quantityInPosession / quantityRequired
+    const sum = arrayOfPercentages.reduce((previous, current) => current + previous)
+    const avg = sum / arrayOfPercentages.length
+
+    this.ingredientPercentage = avg
   }
 
 }

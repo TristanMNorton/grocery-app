@@ -26,7 +26,6 @@ router.post('/', async function (req, res, next) {
  * Ingredient DELETE
  */
 router.delete('/:id', async function (req, res, next) {
-  console.log(req.params.id)
   const id = req.params.id
 
   const response = await ingredientDelete(id)
