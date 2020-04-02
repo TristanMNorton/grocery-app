@@ -90,10 +90,14 @@ export default {
       return this.allIngredients
         ? this.allIngredients.map(ingredient => {
           const { ingredientsRequired } = this.formData
-          const shouldDisable = ingredientsRequired
-            .filter(selectedIngredient =>
-              selectedIngredient.ingredient === ingredient.id
-            ).length > 0
+          let shouldDisable = false
+
+          if (ingredientsRequired) {
+            shouldDisable = ingredientsRequired
+              .filter(selectedIngredient =>
+                selectedIngredient.ingredient === ingredient.id
+              ).length > 0
+          }
 
           return {
             text: ingredient.attributes.name,
@@ -152,9 +156,11 @@ export default {
     saveRecipe () {
       store.dispatch('saveRecipe', this.formData)
         .then(() => {
-          Object.keys(this.formData).forEach(key => {
-            this.formData[key] = null
-          })
+          this.formData.name = null
+          this.formData.description = null
+          this.formData.instructions = null
+          this.formData.rating = null
+          this.formData.ingredientsRequired = []
         })
         .catch(errors => {
           Object.keys(errors).forEach(error => {
