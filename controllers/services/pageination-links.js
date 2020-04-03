@@ -1,9 +1,10 @@
 /**
- * Process pagination links
- * Author: Tristan Norton 2019
+ *  Author: Tristan Norton 2019
  *
- * @param Object [req] Express request object
- * @param Object [paginatedData] Mongoose paginate pagination data
+ * @function paginationLinks
+ * @param  {Object} req Express request object
+ * @param  {Object} paginatedData Pagination data provided by mongoose pagination lib
+ * @return {Object} Object of relevant paginated links
  */
 
 module.exports = (req, paginatedData) => {
