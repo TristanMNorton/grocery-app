@@ -26,6 +26,7 @@ const methods = {
       if (err) { throw err }
 
       this.availibleIngredients = docs.map(doc => {
+        console.log(docs)
         /**
          * Calculates individual percentage availibility on the fly
          */
@@ -35,8 +36,11 @@ const methods = {
               doc._id.toString() ===
               ingredient.ingredient.toString())
 
+        const { quantityRequired } = associatedIngredient
+
         return {
           ...doc.toObject(),
+          quantityRequired,
           percentage: doc.quantity / associatedIngredient.quantityRequired
         }
       })
