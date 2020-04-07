@@ -26,7 +26,6 @@ const methods = {
       if (err) { throw err }
 
       this.availibleIngredients = docs.map(doc => {
-        console.log(docs)
         /**
          * Calculates individual percentage availibility on the fly
          */
