@@ -134,7 +134,9 @@ const store = new Vuex.Store({
     },
 
     updateExistingIngredient (state, data) {
-      const [existingIngredient] = state.allIngredients.filter(ingredient => ingredient.id === data.id)
+      const [existingIngredient] = state
+        .allIngredients
+        .filter(ingredient => ingredient.id === data.id)
 
       Object.keys(existingIngredient).forEach(key => {
         existingIngredient[key] = data[key]
@@ -142,9 +144,11 @@ const store = new Vuex.Store({
     },
 
     removeIngredientFromState (state, ingredientId) {
-      state.allIngredients = state.allIngredients.filter(
-        ingredient => ingredient.id !== ingredientId
-      )
+      state.allIngredients = state
+        .allIngredients
+        .filter(
+          ingredient => ingredient.id !== ingredientId
+        )
     }
   }
 

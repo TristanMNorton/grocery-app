@@ -86,6 +86,7 @@ export default {
   },
 
   computed: {
+
     normalizedIngredients () {
       return this.allIngredients
         ? this.allIngredients.map(ingredient => {
@@ -111,28 +112,35 @@ export default {
     selectedIngredientsNormalized () {
       const tempArray = []
 
-      this.formData.ingredientsRequired.forEach(ingredient => {
-        const [ingredientObject] = this.allIngredients.filter(topIngredient => topIngredient.id === ingredient.ingredient)
+      this.formData
+        .ingredientsRequired
+        .forEach(ingredient => {
+          const [ingredientObject] = this.allIngredients
+            .filter(topIngredient =>
+              topIngredient.id === ingredient.ingredient
+            )
 
-        const {
-          _id,
-          quantityType,
-          name
-        } = ingredientObject.attributes
+          const {
+            _id,
+            quantityType,
+            name
+          } = ingredientObject.attributes
 
-        tempArray.push({
-          _id,
-          quantityType,
-          name,
-          quantity: ingredient.quantityRequired
+          tempArray.push({
+            _id,
+            quantityType,
+            name,
+            quantity: ingredient.quantityRequired
+          })
         })
-      })
 
       return tempArray
     }
+
   },
 
   methods: {
+
     getAllIngredients () {
       axios.get('/api/v1/ingredient', {
         pagination: false
@@ -156,11 +164,9 @@ export default {
     saveRecipe () {
       store.dispatch('saveRecipe', this.formData)
         .then(() => {
-          this.formData.name = null
-          this.formData.description = null
-          this.formData.instructions = null
-          this.formData.rating = null
-          this.formData.ingredientsRequired = []
+          Object.keys(this.formData).forEach(key => {
+            this.formData[key] = null
+          })
         })
         .catch(errors => {
           Object.keys(errors).forEach(error => {
@@ -168,11 +174,13 @@ export default {
           })
         })
     }
+
   },
 
   mounted () {
     this.getAllIngredients()
   }
+
 }
 </script>
 

@@ -60,6 +60,7 @@ export default {
   },
 
   computed: {
+
     normalizedMeasurmentOptions () {
       return Object.keys(this.measurementTypes).map(key => {
         return {
@@ -68,12 +69,15 @@ export default {
         }
       })
     },
+
     errorsExist () {
       return this.errors.length > 0
     }
+
   },
 
   methods: {
+
     saveIngredient () {
       this.errors = []
 
@@ -89,6 +93,7 @@ export default {
           })
         })
     }
+
   }
 
 }
