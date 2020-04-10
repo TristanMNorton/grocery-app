@@ -44,10 +44,13 @@ export default {
   },
 
   computed: {
+
     ...mapState(['allRecipes']),
+
     recipeList () {
       return this.recipeData.map(recipe => recipe.attributes)
     }
+
   },
 
   mounted () {
