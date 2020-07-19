@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.2",
     "standard": "^14.3.1",
