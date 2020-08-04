@@ -3,9 +3,11 @@ var router = express.Router()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  const options = { root: __dirname }
+  const options = { root: process.cwd() }
 
-  res.sendFile('dist/index.html', options, error => {
+  res.set('Content-Type', 'text/html')
+
+  res.sendFile('public/index.html', options, error => {
     if (error) {
       res.writeHead(500)
       res.end()
