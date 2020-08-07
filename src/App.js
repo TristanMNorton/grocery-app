@@ -1,26 +1,46 @@
 import React from 'react'
-import logo from './logo.svg'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom'
+import RecipeList from './Views/RecipeList'
+import IngredientList from './Views/IngredientList'
+import RecipeDetail from './Views/RecipeDetail'
 import './App.css'
 
 function App () {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/recipes'>Recipes</Link>
+            </li>
+            <li>
+              <Link to='/ingredients'>Ingredients</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path='/ingredients'>
+            <IngredientList />
+          </Route>
+          <Route path='/recipes'>
+            <RecipeList />
+          </Route>
+          <Route path='/recipe/:id'>
+            <RecipeDetail />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default App
