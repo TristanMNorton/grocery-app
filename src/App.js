@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-import RecipeList from './Views/RecipeList'
+import Recipes from './Views/Recipes'
 import IngredientList from './Views/IngredientList'
 import RecipeDetail from './Views/RecipeDetail'
 import './App.css'
@@ -32,7 +32,7 @@ function App () {
             <IngredientList />
           </Route>
           <Route path='/recipes'>
-            <RecipeList />
+            <Recipes />
           </Route>
           <Route path='/recipe/:id'>
             <RecipeDetail />
